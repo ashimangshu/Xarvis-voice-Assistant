@@ -109,6 +109,18 @@ function takeCommand(message) {
             let date = new Date().toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric"});
             speak(date);
     }
+        else if (message.includes("search music") || message.includes("play")) {
+    let searchQuery = message.replace("search music", "").replace("play", "").trim();
+    if (searchQuery.length > 0) {
+        speak("Playing " + searchQuery + " on YouTube");
+
+        // Open YouTube and automatically play the first video
+        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(searchQuery)}&sp=EgIQAQ%253D%253D`, "_blank");
+    } else {
+        speak("Please tell me the name of the song.");
+    }
+}
+
     else {
         let finalText = "This is what I found on the internet regarding " + message.replace(/xarvis|jarvis|jarvish/gi, "");
         speak(finalText);
